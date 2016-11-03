@@ -1,0 +1,224 @@
+" configuration vim + IDE
+" pcht 2016
+
+
+" Vundle https://github.com/VundleVim/Vundle.vim
+" install with :
+"     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" set nocompatible              be iMproved, required - Isnt it automatic with .vimrc?? 
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'commentary.vim'
+Plugin 'Syntastic'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'surround.vim'
+
+Plugin 'ciscoacl.vim'
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" syntax
+syntax on
+
+" colorscheme default
+colorscheme elflord
+
+" search
+" set incsearch
+" set hlsearch
+
+" print code with :hardcopy using impression.lam.jussieu.fr
+set printdevice=hp5550-509
+set printoptions=left:5pt,right:5pt,top:5pt,bottom:5pt,number:y,duplex:off,wrap:y,paper:A4,portrait:y
+set printheader=%<%F\ -\ page\ %N%=Print\ at\ %{strftime(\'%Y-%m-%d\ %H:%M\')}
+" FIXME set printfont=:h18
+
+""""""""""""""""""""
+" message
+" function! s:DisplayStatus(msg)
+"     echohl Todo
+"     echo a:msg
+"     echohl None
+" endfunction
+
+
+"""""""""""""""""""
+" ligne de statut
+set statusline=%F%m%r%h%w\ %{fugitive#statusline()}%=[BUF=%n][FORMAT=%{&ff}][TYPE=%Y][ASCII=%03.3b][LINE=%03l][COL=%03v][%p%%]
+set laststatus=2
+
+"""""""""""""""""""
+" numéro de ligne
+set number
+highlight LineNr ctermbg=black ctermfg=gray
+
+"""""""""""""""""""
+" ligne courante
+set cursorline
+highlight CursorLine term=underline cterm=underline
+
+"""""""""""""""""""
+" autoindent
+" set autoindent
+" tabulation
+" set expandtab
+" set shiftwidth=4
+" set softtabstop=4
+" set tabstop=4
+
+"" replis de code <fold>
+"" <n>zf pour créer un repli
+"" za pour ouvrir/fermer un repli déjà crée
+"" zm pour fermer tous les replis
+"" zr pour ouvrir tous les replis
+" function! MyFoldFunction ()
+"     let line = getline(v:foldstart)
+"     let sub = substitute(line,'/\*\|\*/\|^\s+','','g')
+"     let lines = v:foldend - v:foldstart + 1
+"     return '[+] ' . v:folddashes.sub . '...' . lines . ' lignes...' . getline(v:foldend)
+" endfunction
+" set foldenable
+"" afficher un = sur les replis
+" set fillchars=fold:=
+" set foldtext=MyFoldFunction()
+
+"""""""""""""""""""
+" les onglets
+" tabe <file> créer un onglet
+"function! MoveTab(direction)
+"    if (a:direction == 'left')
+"        let tabnum = tabpagenr()-2
+"        if (tabnum < 0)
+"            let tabnum = 0
+"        endif
+"        execute 'tabm '.tabnum
+"    else
+"        let tabnum = tabpagenr()
+"        execute 'tabm '.tabnum
+"    endif
+"endfunction
+"highlight TabLine term=none cterm=none
+"highlight TabLineSel ctermbg=darkblue
+" raccourcis
+" gF ouvre un onglet sur le mot sous le cursor
+"map <C-LEFT> <ESC>:tabprevious<CR>
+"map <C-RIGHT> <ESC>:tabnext<CR> 
+
+
+"""""""""""""""""""
+" correcteur orthographique
+" utilisation
+" <]+s>, <[+s>: aller a l'erreur precedente, suivante
+
+"set spell
+"setlocal spell spelllang=fr,en
+"highlight SpellBad term=underline ctermfg=white ctermbg=red cterm=underline
+"highlight SpellCap term=italic,underline ctermfg=yellow ctermbg=red  cterm=underline
+"highlight SpellRare term=bold,italic,underline ctermfg=cyan ctermbg=red cterm=underline
+"highlight SpellLocal term=underline ctermfg=grey ctermbg=red cterm=underline
+
+"highlight SpellErrors term=italic,underline ctermbg=red ctermfg=white
+
+
+""""""""""""""""""
+" ouverture du fichier à l'ancienne position
+function! s:CursorOldPosition()
+    if line("'\"") > 0 && line("'\"") <= line("$")
+        exe "normal g`\""
+    endif
+endfunction
+autocmd BufReadPost * silent! call s:CursorOldPosition()
+
+" """""""""""""""""""
+" " autocompletion
+" " <Ctrl+x><Ctrl+n> autocompletion direct (nom dans le fichier courant)
+" " <Ctrl+x><Ctrl+k> autocompletion dictionnaire (dictionnaire perso ou fichier syntax/<ext>.vim)
+" " autocmd FileType * exec('setlocal dict+='.$VIMRUNTIME.'/syntax/'.expand('<amatch>').'.vim')
+" function! MultiCompletion()
+"     if &omnifunc != ''
+"         return "\<C-x>\<C-o>"
+"     elseif &dictionary != ''
+"         return "\<C-x>\<C-k>"
+"     else
+"         return "\<C-x>\<C-n>"
+"     endif
+" endfunction
+" " map <S-TAB> <C-r>=MultiCompletion()<CR>
+" map <c-o> <C-r>=MultiCompletion()<CR>
+
+"""""""""""""""""""
+" templates
+function! LoadTemplate(extension,type)
+    if (a:type == 'all')
+        silent! execute '0r' . $HOME . '/.vim/__tpl/' . a:extension . '.tpl'
+        silent! execute 'source ' .$HOME . '/.vim/__tpl.vim'
+    endif
+    " abbreviations
+    silent! execute 'source ' .$HOME . '/.vim/__tpl/' . a:extension . '.abb'
+    " dictionaries
+    silent! execute 'source ' .$HOME . '/.vim/__tpl/' . a:extension . '.dict'
+    " commandes vim
+    silent! execute 'source ' .$HOME . '/.vim/__tpl/' . a:extension . '.vim'
+endfunction
+autocmd BufNewFile * silent! call LoadTemplate('%:e','all')
+autocmd BufRead * silent! call LoadTemplate('%:e','notall')
+
+" " omnifunc
+" if has("autocmd") && exists("+omnifunc") 
+" autocmd Filetype * 
+"     \  if &omnifunc == "" | 
+"     \   setlocal omnifunc=syntaxcomplete#Complete | 
+"     \  endif 
+" endif 
+
+" CISCO ACL
+augroup filetype 
+        au! BufRead,BufNewFile *.crules     set filetype=ciscoacl 
+        au! BufRead,BufNewFile *.acl        set filetype=ciscoacl 
+augroup END
+
+" markdown syntax for gitit
+augroup filetype 
+        au! BufRead,BufNewFile *.page     set filetype=markdown
+        au! BufRead,BufNewFile *.md       set filetype=markdown 
+augroup END
+
+"" UltiSnips https://github.com/sirver/ultisnips
+"" Activate snipMate snippers (disable by default)
+" let g:UltiSnips = {}
+" let g:UltiSnips.snipmate_ft_filter = { 'default' : {'filetypes': ['_', 'FILETYPE'] } }
+" use python 2
+" let g:UltiSnipsUsePythonVersion = 2
+"" change key binding 
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" let g:UltiSnipsListSnippets="<c-l>"
+" If you want :UltiSnipsEdit to split your window.
+" let g:UltiSnipsEditSplit="vertical"
+
+" let g:snips_author = 'Patrick CAO HUU THIEN'
+" let g:UltiSnips.ExpandTrigger="<tab>"
+" let g:UltiSnips.JumpForwardTrigger="<tab>"
+" let g:UltiSnips.JumpBackwardTrigger="<s-tab>"
+" let g:UltiSnips.ListSnippets="<c-tab>"
+
+"" numbers-vim
+" nnoremap <F3> :NumbersToggle<CR>
+
+""" keymaps
+nmap <Left> <Nop>
+nmap <Right> <Nop>
+nmap <Up> <Nop>
+nmap <Down> <Nop>
+
+
