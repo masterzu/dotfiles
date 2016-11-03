@@ -216,9 +216,27 @@ augroup END
 " nnoremap <F3> :NumbersToggle<CR>
 
 """ keymaps
+" no arrows keys no more
 nmap <Left> <Nop>
 nmap <Right> <Nop>
 nmap <Up> <Nop>
 nmap <Down> <Nop>
+imap <Left> <Nop>
+imap <Right> <Nop>
+imap <Up> <Nop>
+imap <Down> <Nop>
+" vmap <Left> <Nop>
+" vmap <Right> <Nop>
+" vmap <Up> <Nop>
+" vmap <Down> <Nop>
+nmap K <C-u>
+nmap J <C-d>
+
+" Esc remap
+imap jj <Esc>
+imap kk <Esc>
+" map caps-lock with Xvindow
+au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+au VimLeave * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
 
 
