@@ -225,12 +225,6 @@ imap <Left> <Nop>
 imap <Right> <Nop>
 imap <Up> <Nop>
 imap <Down> <Nop>
-" vmap <Left> <Nop>
-" vmap <Right> <Nop>
-" vmap <Up> <Nop>
-" vmap <Down> <Nop>
-nmap K <C-u>
-nmap J <C-d>
 
 " Esc remap
 imap jj <Esc>
@@ -239,4 +233,12 @@ imap kk <Esc>
 au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 " au VimLeave * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
 
-
+" moves
+nmap K <C-u>
+nmap J <C-d>
+" speed up
+" edit .vimrc
+nmap <Leader>v :vs ~/.vimrc<Cr>
+imap <Leader>v <Esc>:vs ~/.vimrc<Cr>
+" remap :
+nmap ; :
