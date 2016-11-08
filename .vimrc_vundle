@@ -215,6 +215,17 @@ augroup END
 "" numbers-vim
 " nnoremap <F3> :NumbersToggle<CR>
 
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+let g:syntastic_auto_jump = 2
+
 """ keymaps
 " no arrows keys no more
 nmap <Left> <Nop>
@@ -230,7 +241,7 @@ imap <Down> <Nop>
 imap jj <Esc>
 imap kk <Esc>
 " map caps-lock with Xvindow
-au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+au VimEnter * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 " au VimLeave * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
 
 " moves
