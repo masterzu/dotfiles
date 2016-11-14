@@ -57,6 +57,10 @@ set statusline=%F%m%r%h%w\ %{fugitive#statusline()}%=[BUF=%n][FORMAT=%{&ff}][TYP
 set laststatus=2
 
 """""""""""""""""""
+" affiche les touches en mode commande
+set showcmd
+
+"""""""""""""""""""
 " numéro de ligne
 set number
 highlight LineNr ctermbg=black ctermfg=gray
