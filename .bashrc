@@ -93,3 +93,8 @@ fi
 # dhelp browser
 export BROWSER=google-chrome
 
+# aliases
+alias ls='ls -F --color'
+alias l='ls -l'
+alias ll='ls -al'
+alias sc=screen
