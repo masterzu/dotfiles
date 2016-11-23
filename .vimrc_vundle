@@ -69,6 +69,12 @@ highlight LineNr ctermbg=black ctermfg=gray
 " ligne courante
 set cursorline
 highlight CursorLine term=underline cterm=underline
+"""""""""""""""""""
+" Search/IncSearch
+set hlsearch
+highlight Search term=reverse,bold cterm=reverse,bold ctermfg=None ctermbg=None
+set incsearch
+highlight IncSearch term=reverse,bold cterm=reverse,bold ctermfg=None ctermbg=None
 
 """""""""""""""""""
 " autoindent
