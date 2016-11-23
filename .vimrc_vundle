@@ -242,10 +242,10 @@ nmap <Left> <Nop>
 nmap <Right> <Nop>
 nmap <Up> <Nop>
 nmap <Down> <Nop>
-imap <Left> <Nop>
-imap <Right> <Nop>
-imap <Up> <Nop>
-imap <Down> <Nop>
+" imap <Left> <Np>
+" imap <Right> <Nop>
+" imap <Up> <Nop>
+" imap <Down> <Nop>
 
 " Esc remap
 imap jj <Esc>
@@ -263,3 +263,6 @@ nmap <Leader>v :vs ~/.vimrc<Cr>
 imap <Leader>v <Esc>:vs ~/.vimrc<Cr>
 " remap :
 nmap ; :
+" quick save
+imap <Leader>s <Esc>:w<Cr>
+nmap <Leader>s :w<Cr>
