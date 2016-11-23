@@ -17,7 +17,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tpope/vim-fugitive'
 Plugin 'commentary.vim'
-Plugin 'Syntastic'
+" Plugin 'Syntastic'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'surround.vim'
 
@@ -220,9 +220,9 @@ augroup END
 " nnoremap <F3> :NumbersToggle<CR>
 
 " syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
 " let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
