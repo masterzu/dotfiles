@@ -32,24 +32,11 @@ syntax on
 " colorscheme default
 colorscheme elflord
 
-" search
-" set incsearch
-" set hlsearch
-
 " print code with :hardcopy using impression.lam.jussieu.fr
 set printdevice=hp5550-509
 set printoptions=left:5pt,right:5pt,top:5pt,bottom:5pt,number:y,duplex:off,wrap:y,paper:A4,portrait:y
 set printheader=%<%F\ -\ page\ %N%=Print\ at\ %{strftime(\'%Y-%m-%d\ %H:%M\')}
 " FIXME set printfont=:h18
-
-""""""""""""""""""""
-" message
-" function! s:DisplayStatus(msg)
-"     echohl Todo
-"     echo a:msg
-"     echohl None
-" endfunction
-
 
 """""""""""""""""""
 " ligne de statut
@@ -74,7 +61,7 @@ highlight CursorLine term=underline cterm=underline
 set hlsearch
 highlight Search term=reverse,bold cterm=reverse,bold ctermfg=None ctermbg=None
 set incsearch
-highlight IncSearch term=reverse,bold cterm=reverse,bold ctermfg=None ctermbg=None
+highlight IncSearch term=reverse cterm=reverse ctermfg=None ctermbg=None
 
 """""""""""""""""""
 " autoindent
@@ -234,7 +221,14 @@ augroup END
 " let g:syntastic_auto_loc_list = 1
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
-let g:syntastic_auto_jump = 2
+" let g:syntastic_auto_jump = 2
+
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+" use :find + <tab>
+set path+=**
+" Display all matching files when we tab complete
+set wildmenu
 
 """ keymaps
 " no arrows keys no more
