@@ -86,7 +86,7 @@ fi
 
 # dircolors
 # To create the file: dircolors -p 
-if [ -f ~/.dircolors]; then
+if [ -f ~/.dircolors ]; then
     eval "`dircolors ~/.dircolors`"
 fi
 
