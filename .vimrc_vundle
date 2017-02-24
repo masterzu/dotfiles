@@ -116,14 +116,13 @@ highlight IncSearch term=reverse cterm=reverse ctermfg=None ctermbg=None
 " utilisation
 " <]+s>, <[+s>: aller a l'erreur precedente, suivante
 
-"set spell
 "setlocal spell spelllang=fr,en
-"highlight SpellBad term=underline ctermfg=white ctermbg=red cterm=underline
-"highlight SpellCap term=italic,underline ctermfg=yellow ctermbg=red  cterm=underline
-"highlight SpellRare term=bold,italic,underline ctermfg=cyan ctermbg=red cterm=underline
-"highlight SpellLocal term=underline ctermfg=grey ctermbg=red cterm=underline
-
-"highlight SpellErrors term=italic,underline ctermbg=red ctermfg=white
+setlocal spell spelllang=en_us,fr
+highlight SpellBad term=underline ctermfg=white ctermbg=red cterm=underline
+highlight SpellCap term=italic,underline ctermfg=yellow ctermbg=red  cterm=underline
+highlight SpellRare term=bold,italic,underline ctermfg=cyan ctermbg=red cterm=underline
+highlight SpellLocal term=underline ctermfg=grey ctermbg=red cterm=underline
+highlight SpellErrors term=italic,underline ctermbg=red ctermfg=white
 
 
 """"""""""""""""""
@@ -258,5 +257,5 @@ imap <Leader>v <Esc>:vs ~/.vimrc<Cr>
 " remap :
 nmap ; :
 " quick save
-imap <Leader>s <Esc>:w<Cr>
+imap <Leader>s <Esc>:w<Cr>i
 nmap <Leader>s :w<Cr>
