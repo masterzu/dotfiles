@@ -1,9 +1,15 @@
 #!/bin/bash
 
 ########################################################################
-# Matthew's Git Bash Prompt
+# .bash_prompt
+# 
+# Matthew's Git Bash Prompt https://github.com/matthewmccullough/dotfiles
 # +
 # python virtualenv
+# +
+# xterm dynamic title http://www.faqs.org/docs/Linux-mini/Xterm-Title.html#s2
+#
+# define PROMPT_COMMAND to prompt_func
 ########################################################################
          RED="\[\033[0;31m\]"
       YELLOW="\[\033[0;33m\]"
@@ -112,3 +118,4 @@ function prompt_func() {
 }
 
 PROMPT_COMMAND=prompt_func
+# end .bash_prompt

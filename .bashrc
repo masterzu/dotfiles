@@ -1,5 +1,5 @@
-# bash start script
-# (c) Pcht
+# .bashrc bash start script
+# (c) Pcht 2007-2017
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -55,46 +55,24 @@ YELLOW="\[\033[1;33m\]"
 WHITE="\[\033[1;37m\]"
 DEFAULT_COLOR="\[\033[00m\]"
 
-## MADE in .bash_git
-# DEFAULT_PROMT_SEP="--"
-# DEFAULT_PROMPT="$DEFAULT_COLOR[$YELLOW\u$DEFAULT_COLOR@$WHITE\h$DEFAULT_COLOR] $DEFAULT_PROMT_SEP $BROWN\w $DEFAULT_PROMT_SEP \t$DEFAULT_COLOR"
-# export PS1="\`if [ \$? = 0 ];
-#     then
-#         echo -e '$? $GREEN$DEFAULT_PROMPT $GREEN :)\n$DEFAULT_PROMT_SEP\$$DEFAULT_COLOR ';
-#     else
-#         echo -e '$? $LIGHT_RED$DEFAULT_PROMPT $LIGHT_RED :(\n$DEFAULT_PROMT_SEP\$$DEFAULT_COLOR ';
-#     fi; \`"
+# very basic prompt -- more in .bash_prompt
+PROMPT_COMMAND='PS1="[\u@\h] -- \w  "; echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
 
-# export PS1="${DEFAULT_COLOR}[${YELLOW}\u${DEFAULT_COLOR}@${WHITE}\h${DEFAULT_COLOR}] -- ${BROWN}\w ${DEFAULT_COLOR}-- \$ "
-export PS1="${DEFAULT_COLOR}[${YELLOW}\u${DEFAULT_COLOR}@${WHITE}\h${DEFAULT_COLOR}] -- ${BROWN}\w ${DEFAULT_COLOR} "
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
-    ;;
-*)
-    ;;
-esac
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
+test -f ~/dotfiles/.bash_prompt && source ~/dotfiles/.bash_prompt
 
 # dircolors
 # To create the file: dircolors -p 
-if [ -f ~/.dircolors ]; then
-    eval "`dircolors ~/.dircolors`"
+if [ -f ~/dotfiles/.dircolors ]; then
+    eval "`dircolors ~/dotfiles/.dircolors`"
 fi
 
-# dhelp browser
+# I love google-chrome :)
 export BROWSER=google-chrome
 
-# aliases
+# very min bash aliases
 alias ls='ls -F --color'
 alias l='ls -l'
 alias ll='ls -al'
-alias sc=screen
+
+test -f ~/dotfiles/.bash_aliases && source ~/dotfiles/.bash_aliases
+# end .bashrc
