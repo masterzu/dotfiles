@@ -11,4 +11,5 @@ alias td='todo -c --filter -done,+children'
 alias tdall='todo --force-colour -A|less -r'
 alias go=gnome-open
 alias pp='python -mjson.tool'
+alias cd='cd -P'
 # end .bash_aliases
