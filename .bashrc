@@ -75,4 +75,7 @@ alias l='ls -l'
 alias ll='ls -al'
 
 test -f ~/dotfiles/.bash_aliases && source ~/dotfiles/.bash_aliases
+
+# RUST env https://www.rust-lang.org/fr-FR/
+test -f $HOME/.cargo/env && source $HOME/.cargo/env
 # end .bashrc
