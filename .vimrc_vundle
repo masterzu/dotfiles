@@ -42,6 +42,9 @@ set printoptions=left:5pt,right:5pt,top:5pt,bottom:5pt,number:y,duplex:off,wrap:
 set printheader=%<%F\ -\ page\ %N%=Print\ at\ %{strftime(\'%Y-%m-%d\ %H:%M\')}
 " FIXME set printfont=:h18
 
+" modeline : enable vim:<space> [ vim_set ] +
+set modeline
+
 """""""""""""""""""
 " ligne de statut
 set statusline=%F%m%r%h%w\ %{fugitive#statusline()}%=[BUF=%n][FORMAT=%{&ff}][TYPE=%Y][ASCII=%03.3b][LINE=%03l][COL=%03v][%p%%]
