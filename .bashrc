@@ -76,6 +76,10 @@ alias ll='ls -al'
 
 test -f ~/dotfiles/.bash_aliases && source ~/dotfiles/.bash_aliases
 
+
+# nodejs
+test -d ~/.local_node/bin && export PATH="$PATH:$HOME/.local_node/bin"
+
 # RUST env https://www.rust-lang.org/fr-FR/
 test -f $HOME/.cargo/env && source $HOME/.cargo/env
 # end .bashrc
