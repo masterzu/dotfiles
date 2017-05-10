@@ -24,6 +24,7 @@ Plugin 'surround.vim'
 Plugin 'ciscoacl.vim'
 
 " language
+Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'rust-lang/rust.vim'
 
 " All of your Plugins must be added before the following line
