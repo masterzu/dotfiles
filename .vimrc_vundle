@@ -24,8 +24,12 @@ Plugin 'surround.vim'
 Plugin 'ciscoacl.vim'
 
 " language
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'rust-lang/rust.vim'
+" Plugin 'octol/vim-cpp-enhanced-highlight'
+" C++ http://www.vim.org/scripts/script.php?script_id=3302
+" install with vim clang_complete.vmb -c 'so %' -c 'q'
+" GLSL
+Plugin 'tikhomirov/vim-glsl'
+" Plugin 'rust-lang/rust.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
