@@ -7,6 +7,7 @@
 	ds = diff --stat
 	l = log --graph --decorate --oneline --all
 	s = status --short --branch
+	ll = log --graph --decorate --pretty=format:'%C(yellow)%h %Cred%ad %Cgreen%d %Creset%s' --date=short --all
 
 [color]
 	ui = true
