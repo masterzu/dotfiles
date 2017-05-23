@@ -1,10 +1,10 @@
 # .bash_aliases
 # (c) pcht 199x - 2017
 alias ls='ls -F --color'
-alias l='ls -l'
+alias l='ls -lh'
 alias d='ls -al | egrep ^d'
 alias dl='ls -al | egrep ^l'
-alias ll='ls -al'
+alias ll='ls -alh'
 alias sc=screen
 alias h=history
 alias td='todo -c --force-colour --filter -done,+children | less -r'
