@@ -12,4 +12,7 @@ alias tdall='todo --force-colour -A|less -r'
 alias go=gnome-open
 alias pp='python -mjson.tool'
 alias cd='cd -P'
+alias tm=tmux
+alias tma='tmux attach'
+alias tmn='tmux new'
 # end .bash_aliases

@@ -1,5 +1,5 @@
 # .bashrc bash start script
-# (c) Pcht 2007-2017
+# (c) Pcht 2007-2018
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -11,7 +11,7 @@ export MAILCHECK=30
 
 export EDITOR=vim
 
-export PATH=".:$HOME/bin:$PATH:/usr/sbin:/sbin"
+export PATH=".:$HOME/bin:$HOME/.local/bin:$PATH:/usr/sbin:/sbin"
 export LANG=fr_FR.UTF-8
 
 
@@ -74,12 +74,21 @@ alias ls='ls -F --color'
 alias l='ls -l'
 alias ll='ls -al'
 
+
 test -f ~/dotfiles/.bash_aliases && source ~/dotfiles/.bash_aliases
+
+### manpath
+export MANPATH=$HOME/.local/share/man:
 
 
 # nodejs
 test -d ~/.local_node/bin && export PATH="$PATH:$HOME/.local_node/bin"
 
 # RUST env https://www.rust-lang.org/fr-FR/
-test -f $HOME/.cargo/env && source $HOME/.cargo/env
+# test -f $HOME/.cargo/env && source $HOME/.cargo/env
+
+# autolaunch tmux
+# https://wiki.archlinux.org/index.php/Tmux#Bash
+# [[ $- != *i* ]] && return
+# [[ -z "$TMUX" ]] && exec tmux
 # end .bashrc
