@@ -8,12 +8,10 @@
 export MAIL=/var/mail/$USER
 export MAILCHECK=30
 
-
 export EDITOR=vim
 
 export PATH=".:$HOME/bin:$HOME/.local/bin:$PATH:/usr/sbin:/sbin"
 export LANG=fr_FR.UTF-8
-
 
 # history : don't put duplicate lines in the history. Ignore line begin with space
 export HISTCONTROL=ignoredups:ignorespace
@@ -30,7 +28,6 @@ shopt -s checkwinsize
 
 ## autocd
 shopt -s autocd
-
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
@@ -58,14 +55,6 @@ DEFAULT_COLOR="\[\033[00m\]"
 # very basic prompt -- more in .bash_prompt
 PROMPT_COMMAND='PS1="[\u@\h] -- \w  "; echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
 
-test -f ~/dotfiles/.bash_prompt && source ~/dotfiles/.bash_prompt
-
-# dircolors
-# To create the file: dircolors -p 
-if [ -f ~/dotfiles/.dircolors ]; then
-    eval "`dircolors ~/dotfiles/.dircolors`"
-fi
-
 # I love google-chrome :)
 export BROWSER=google-chrome
 
@@ -74,21 +63,25 @@ alias ls='ls -F --color'
 alias l='ls -l'
 alias ll='ls -al'
 
-
+### dotfiles stuff
 test -f ~/dotfiles/.bash_aliases && source ~/dotfiles/.bash_aliases
+test -f ~/dotfiles/.bash_prompt && source ~/dotfiles/.bash_prompt
+test -d ~/dotfiles/bash_completion && { for f in ~/dotfiles/bash_completion/*.bash; do source $f; done; }
+# To create the file: dircolors -p 
+test -f ~/dotfiles/.dircolors && eval "`dircolors ~/dotfiles/.dircolors`"
 
-### manpath
+### .local stuffs
+# manpath
 export MANPATH=$HOME/.local/share/man:
 
-
-# nodejs
+### nodejs
 test -d ~/.local_node/bin && export PATH="$PATH:$HOME/.local_node/bin"
-
-# RUST env https://www.rust-lang.org/fr-FR/
-# test -f $HOME/.cargo/env && source $HOME/.cargo/env
 
 # autolaunch tmux
 # https://wiki.archlinux.org/index.php/Tmux#Bash
-# [[ $- != *i* ]] && return
-# [[ -z "$TMUX" ]] && exec tmux
+# test $- != *i*  && return
+test -z "$TMUX" -a "$TERM" == "st-256color" && {
+  test -n "$(tmux ls 2>/dev/null)" && exec tmux attach || exec tmux
+}
+
 # end .bashrc
