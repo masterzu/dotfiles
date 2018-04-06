@@ -1,5 +1,5 @@
 " configuration vim + IDE
-" pcht 2016
+" pcht 2016-2018
 
 
 " Vundle https://github.com/VundleVim/Vundle.vim
@@ -19,7 +19,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'commentary.vim'
 " Plugin 'Syntastic'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'surround.vim'
+Plugin 'tpope/vim-surround'
 
 Plugin 'ciscoacl.vim'
 
@@ -266,8 +266,6 @@ nmap J <C-d>
 " edit .vimrc
 nmap <Leader>v :vs ~/.vimrc<Cr>
 imap <Leader>v <Esc>:vs ~/.vimrc<Cr>
-" remap :
-nmap ; :
 " quick save
 imap <Leader>s <Esc>:w<Cr>i
 nmap <Leader>s :w<Cr>
