@@ -23,6 +23,9 @@ Plugin 'tpope/vim-surround'
 
 Plugin 'ciscoacl.vim'
 
+" https://github.com/dhruvasagar/vim-table-mode
+Plugin 'dhruvasagar/vim-table-mode'
+
 " language
 " Plugin 'octol/vim-cpp-enhanced-highlight'
 " C++ http://www.vim.org/scripts/script.php?script_id=3302
@@ -47,7 +50,7 @@ set printoptions=left:5pt,right:5pt,top:5pt,bottom:5pt,number:y,duplex:off,wrap:
 set printheader=%<%F\ -\ page\ %N%=Print\ at\ %{strftime(\'%Y-%m-%d\ %H:%M\')}
 " FIXME set printfont=:h18
 
-" modeline : enable vim:<space> [ vim_set ] +
+" modeline : enable « vim:<space> [ vim_set ] + »
 set modeline
 
 """""""""""""""""""
@@ -65,9 +68,12 @@ set number
 highlight LineNr ctermbg=black ctermfg=gray
 
 """""""""""""""""""
-" ligne courante
-set cursorline
+" ligne et colonne courante: activation en mode insert et pas en mode normal
+:autocmd InsertEnter,InsertLeave * set cursorline! cursorcolumn!
 highlight CursorLine term=underline cterm=underline
+set cursorcolumn
+" highlight CursorColumn term=none cterm=none ctermbg=grey ctermfg=black
+highlight CursorColumn term=underline cterm=underline
 """""""""""""""""""
 " Search/IncSearch
 set hlsearch
@@ -269,3 +275,12 @@ imap <Leader>v <Esc>:vs ~/.vimrc<Cr>
 " quick save
 imap <Leader>s <Esc>:w<Cr>i
 nmap <Leader>s :w<Cr>
+
+" vim-table-mode
+" :TableModeToggle pour activer/deactiver
+" table cpmatible rst
+let g:table_mode_corner_corner='+'
+let g:table_mode_header_fillchar='='
+nmap <Leader>tm <Esc>:TableModeToggle<cr>
+imap <Leader>tm <Esc>:TableModeToggle<cr>i
+
