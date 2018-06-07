@@ -71,7 +71,7 @@ highlight LineNr ctermbg=black ctermfg=gray
 " ligne et colonne courante: activation en mode insert et pas en mode normal
 :autocmd InsertEnter,InsertLeave * set cursorline! cursorcolumn!
 highlight CursorLine term=underline cterm=underline
-set cursorcolumn
+set cursorcolumn cursorline
 " highlight CursorColumn term=none cterm=none ctermbg=grey ctermfg=black
 highlight CursorColumn term=underline cterm=underline
 """""""""""""""""""
@@ -271,14 +271,22 @@ nmap J <C-d>
 " speed up
 " edit .vimrc
 nmap <Leader>v :vs ~/.vimrc<Cr>
-imap <Leader>v <Esc>:vs ~/.vimrc<Cr>
+imap <Leader>v <Esc>:vs ~/.vimrc<Cr>i
+" source .vimrc
+nmap <Leader>V :source ~/.vimrc<Cr>
 " quick save
 imap <Leader>s <Esc>:w<Cr>i
 nmap <Leader>s :w<Cr>
+" html + php
+nmap <Leader>h :set ft=html<Cr>
+nmap <Leader>p :set ft=php<Cr>
+
 
 " vim-table-mode
 " :TableModeToggle pour activer/deactiver
 " table cpmatible rst
+" racourcis: 
+" visual + :Tableize pour transformer csv (avec ,) en table
 let g:table_mode_corner_corner='+'
 let g:table_mode_header_fillchar='='
 nmap <Leader>tm <Esc>:TableModeToggle<cr>
