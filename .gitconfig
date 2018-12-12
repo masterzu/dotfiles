@@ -9,6 +9,7 @@
 	s = status --short --branch
 	ll = log --graph --decorate --pretty=format:'%C(yellow)%h %Cred%ad %Cgreen%d %Creset%s' --date=short --all
 	dw = diff -w
+	c = commit
 
 [color]
 	ui = true
