@@ -34,6 +34,14 @@ Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'tikhomirov/vim-glsl'
 " Plugin 'rust-lang/rust.vim'
 
+Plugin 'ElmCast/elm-vim'
+
+" https://valloric.github.io/YouCompleteMe/
+Plugin 'Valloric/YouCompleteMe'
+
+" KSP script syntax
+Plugin 'KSP-KOS/EditorTools', {'rtp': 'VIM/vim-kerboscript'}
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -52,6 +60,9 @@ set printheader=%<%F\ -\ page\ %N%=Print\ at\ %{strftime(\'%Y-%m-%d\ %H:%M\')}
 
 " modeline : enable « vim:<space> [ vim_set ] + »
 set modeline
+
+" set backspace normal
+set backspace=2
 
 """""""""""""""""""
 " ligne de statut
@@ -74,12 +85,35 @@ highlight CursorLine term=underline cterm=underline
 set cursorcolumn cursorline
 " highlight CursorColumn term=none cterm=none ctermbg=grey ctermfg=black
 highlight CursorColumn term=underline cterm=underline
+
 """""""""""""""""""
 " Search/IncSearch
 set hlsearch
 highlight Search term=reverse,bold cterm=reverse,bold ctermfg=None ctermbg=None
 set incsearch
 highlight IncSearch term=reverse cterm=reverse ctermfg=None ctermbg=None
+
+"""""""""""""""""""
+" tab/eof as characters
+" https://vi.stackexchange.com/questions/422/displaying-tabs-as-characters
+" dans vim, uriliser Ctrl-v + u + code utf8
+" code : https://codepoints.net/control_pictures
+" 	tab 	: ␉ (U+2409 - SYMBOL FOR HORIZONTAL TABULATION)
+" 		: ˍ (U+02cd - MODIFIER LETTER LOW MACRON)
+" 		: ․ (U+2024 - ONE DOT LEADER)
+" 		: • (U+2022 - BULLET)
+" 	eol 	: ¶ (U+00b6 - PILCROW SIGN)
+" 	trail : ␠ (U+2420 - SYMBOL FOR SPACE)
+" 		: ␣ (U+2423 - OPEN BOX)
+"
+set list
+set listchars=tab:␉․,trail:␠,nbsp:⎵,precedes:<,extends:>
+" listchars as grey
+highlight SpecialKey ctermfg=DarkGrey
+highlight NonText ctermfg=DarkGrey
+nmap <Leader>l <Esc>:set invlist<cr>
+imap <Leader>l <Esc>:set invlist<cr>li
+
 
 """""""""""""""""""
 " autoindent
@@ -206,6 +240,9 @@ augroup filetype
         au! BufRead,BufNewFile *.md       set filetype=markdown 
 augroup END
 
+" kerboscript comment
+autocmd FileType kerboscript setlocal commentstring=//\ %s
+
 "" UltiSnips https://github.com/sirver/ultisnips
 "" Activate snipMate snippers (disable by default)
 " let g:UltiSnips = {}
@@ -279,7 +316,9 @@ imap <Leader>s <Esc>:w<Cr>i
 nmap <Leader>s :w<Cr>
 " html + php
 nmap <Leader>h :set ft=html<Cr>
+imap <Leader>h <esc>:set ft=html<Cr>i
 nmap <Leader>p :set ft=php<Cr>
+imap <Leader>p <esc>:set ft=php<Cr>i
 
 
 " vim-table-mode
