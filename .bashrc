@@ -84,6 +84,9 @@ test -z "$TMUX" -a "$TERM" == "st-256color" && {
   test -n "$(tmux ls 2>/dev/null)" && exec tmux attach || exec tmux
 }
 
+# added by Nix installer
+if [ -e /home/patrick/.nix-profile/etc/profile.d/nix.sh ]; then . /home/patrick/.nix-profile/etc/profile.d/nix.sh; fi 
+
 # golang env
 export PATH=$PATH:/home/patrick/src/golang/go1.11.2/bin
 export GOPATH=/home/patrick/devel/golang
