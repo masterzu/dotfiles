@@ -8,6 +8,8 @@
 # python virtualenv
 # +
 # xterm dynamic title http://www.faqs.org/docs/Linux-mini/Xterm-Title.html#s2
+# + 
+# path minimizer https://superuser.com/a/271223
 #
 # define PROMPT_COMMAND to prompt_func
 ########################################################################
@@ -56,6 +58,11 @@ function _my_parse_git_branch {
   # echo "DEBUG[branch:$branch|remote:$remote|state:$state]"
 }
 
+function short_path {
+	# print first two letters of the path + last dir
+	echo $(dirname $1 | sed -e "s;$HOME;~;" | sed -e "s;\(/[^/]\{1,2\}\)[^/]*;\1;g")/$(basename $1)
+}
+
 function prompt_func() {
     previous_return_value=$?;
 
@@ -90,7 +97,8 @@ function prompt_func() {
     # prompt="${prompt} $(date +%X)"
     
     # PWD
-    prompt="${prompt} \w"
+    # prompt="${prompt} \w"
+    prompt="${prompt} $(short_path $PWD)"
 
     # if test $previous_return_value -eq 0
     # then
