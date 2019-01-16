@@ -84,4 +84,10 @@ test -z "$TMUX" -a "$TERM" == "st-256color" && {
   test -n "$(tmux ls 2>/dev/null)" && exec tmux attach || exec tmux
 }
 
+# golang env
+export PATH=$PATH:/home/patrick/src/golang/go1.11.2/bin
+export GOPATH=/home/patrick/devel/golang
+
+
+
 # end .bashrc
