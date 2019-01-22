@@ -319,6 +319,9 @@ nmap <Leader>h :set ft=html<Cr>
 imap <Leader>h <esc>:set ft=html<Cr>i
 nmap <Leader>p :set ft=php<Cr>
 imap <Leader>p <esc>:set ft=php<Cr>i
+" make
+nmap <Leader>m :w<cr>:make<Cr>
+imap <Leader>m <esc>:w<cr>:make<Cr>li
 
 
 " vim-table-mode
