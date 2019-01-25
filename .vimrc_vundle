@@ -64,6 +64,9 @@ set modeline
 " set backspace normal
 set backspace=2
 
+" no wrap
+set nowrap
+
 """""""""""""""""""
 " ligne de statut
 set statusline=%F%m%r%h%w\ %{fugitive#statusline()}%=[BUF=%n][FORMAT=%{&ff}][TYPE=%Y][ASCII=%03.3b][LINE=%03l][COL=%03v][%p%%]
@@ -299,7 +302,7 @@ nmap <Down> <Nop>
 imap jj <Esc>
 imap kk <Esc>
 " map caps-lock with Xvindow
-au VimEnter * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+" au VimEnter * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 " au VimLeave * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
 
 " moves
@@ -320,8 +323,8 @@ imap <Leader>h <esc>:set ft=html<Cr>i
 nmap <Leader>p :set ft=php<Cr>
 imap <Leader>p <esc>:set ft=php<Cr>i
 " make
-nmap <Leader>m :w<cr>:make<Cr>
-imap <Leader>m <esc>:w<cr>:make<Cr>li
+nmap <Leader>m :w<cr>:!clear<cr>:make<cr>
+imap <Leader>m <esc>:w<cr>:!clear<cr>:make<cr>
 
 
 " vim-table-mode
