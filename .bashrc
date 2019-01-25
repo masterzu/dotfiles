@@ -77,12 +77,6 @@ export MANPATH=$HOME/.local/share/man:
 ### nodejs
 test -d ~/.local_node/bin && export PATH="$PATH:$HOME/.local_node/bin"
 
-# autolaunch tmux
-# https://wiki.archlinux.org/index.php/Tmux#Bash
-# test $- != *i*  && return
-test -z "$TMUX" -a "$TERM" == "st-256color" && {
-  test -n "$(tmux ls 2>/dev/null)" && exec tmux attach || exec tmux
-}
 
 # added by Nix installer
 if [ -e /home/patrick/.nix-profile/etc/profile.d/nix.sh ]; then . /home/patrick/.nix-profile/etc/profile.d/nix.sh; fi 
@@ -90,6 +84,13 @@ if [ -e /home/patrick/.nix-profile/etc/profile.d/nix.sh ]; then . /home/patrick/
 # golang env
 export PATH=$PATH:/home/patrick/src/golang/go1.11.2/bin
 export GOPATH=/home/patrick/devel/golang
+
+# autolaunch tmux
+# https://wiki.archlinux.org/index.php/Tmux#Bash
+# test $- != *i*  && return
+# test -z "$TMUX" -a "$TERM" == "st-256color" && {
+#   test -n "$(tmux ls 2>/dev/null)" && exec tmux attach || exec tmux
+# }
 
 
 
