@@ -61,7 +61,7 @@ function _my_parse_git_branch {
 function short_path {
 	# print first two letters of the path + last dir
 	local home=/ho/patrick
-	echo $(dirname $1 | \
+	echo $(dirname "$1" | \
 		sed -e "s;$HOME;~;" | \
 		sed -e "s;\(/[^/]\{1,2\}\)[^/]*;\1;g")/$(basename "$1") | \
 		sed -e "s;$home;~;" 
@@ -102,7 +102,7 @@ function prompt_func() {
     
     # PWD
     # prompt="${prompt} \w"
-    prompt="${prompt} $(short_path $PWD)"
+    prompt="${prompt} $(short_path "$PWD")"
 
     # if test $previous_return_value -eq 0
     # then
