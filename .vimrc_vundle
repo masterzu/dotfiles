@@ -20,6 +20,7 @@ Plugin 'commentary.vim'
 " Plugin 'Syntastic'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 
 Plugin 'ciscoacl.vim'
 
@@ -64,8 +65,8 @@ set modeline
 " set backspace normal
 set backspace=2
 
-" no wrap
-set nowrap
+" no wrap -- yes i like wrapping
+" set nowrap
 
 """""""""""""""""""
 " ligne de statut
@@ -106,7 +107,7 @@ highlight IncSearch term=reverse cterm=reverse ctermfg=None ctermbg=None
 " 		: ․ (U+2024 - ONE DOT LEADER)
 " 		: • (U+2022 - BULLET)
 " 	eol 	: ¶ (U+00b6 - PILCROW SIGN)
-" 	trail : ␠ (U+2420 - SYMBOL FOR SPACE)
+" 	trail	: ␠ (U+2420 - SYMBOL FOR SPACE)
 " 		: ␣ (U+2423 - OPEN BOX)
 "
 set list
@@ -138,7 +139,8 @@ imap <Leader>l <Esc>:set invlist<cr>li
 "     let lines = v:foldend - v:foldstart + 1
 "     return '[+] ' . v:folddashes.sub . '...' . lines . ' lignes...' . getline(v:foldend)
 " endfunction
-" set foldenable
+set foldenable
+set foldlevel=1000
 "" afficher un = sur les replis
 " set fillchars=fold:=
 " set foldtext=MyFoldFunction()
