@@ -3,6 +3,7 @@
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
+echo ">> .bashrc"
 
 # autocheck local mail
 export MAIL=/var/mail/$USER
@@ -10,7 +11,6 @@ export MAILCHECK=30
 
 export EDITOR=vim
 
-export PATH=".:$HOME/bin:$HOME/.local/bin:$PATH:/usr/sbin:/sbin"
 export LANG=fr_FR.UTF-8
 
 # history : don't put duplicate lines in the history. Ignore line begin with space
@@ -57,6 +57,8 @@ PROMPT_COMMAND='PS1="[\u@\h] -- \w  "; echo -ne "\033]0;${USER}@${HOSTNAME}: ${P
 
 # I love google-chrome :)
 export BROWSER=google-chrome
+# ... and vim
+export EDITOR=vim
 
 # very min bash aliases
 alias ls='ls -F --color'
@@ -66,7 +68,11 @@ alias ll='ls -al'
 ### dotfiles stuff
 test -f ~/dotfiles/.bash_aliases && source ~/dotfiles/.bash_aliases
 test -f ~/dotfiles/.bash_prompt && source ~/dotfiles/.bash_prompt
-test -d ~/dotfiles/bash_completion && { for f in ~/dotfiles/bash_completion/*.bash; do source $f; done; }
+test -d ~/dotfiles/bash_completion && { 
+	for f in ~/dotfiles/bash_completion/*.bash; 
+	do source $f; 
+	done; 
+}
 # To create the file: dircolors -p 
 test -f ~/dotfiles/.dircolors && eval "`dircolors ~/dotfiles/.dircolors`"
 
@@ -74,16 +80,8 @@ test -f ~/dotfiles/.dircolors && eval "`dircolors ~/dotfiles/.dircolors`"
 # manpath
 export MANPATH=$HOME/.local/share/man:
 
-### nodejs
-test -d ~/.local_node/bin && export PATH="$PATH:$HOME/.local_node/bin"
-
-
 # added by Nix installer
 if [ -e /home/patrick/.nix-profile/etc/profile.d/nix.sh ]; then . /home/patrick/.nix-profile/etc/profile.d/nix.sh; fi 
-
-# golang env
-export PATH=$PATH:/home/patrick/src/golang/go1.11.2/bin
-export GOPATH=/home/patrick/devel/golang
 
 # autolaunch tmux
 # https://wiki.archlinux.org/index.php/Tmux#Bash
@@ -92,6 +90,18 @@ export GOPATH=/home/patrick/devel/golang
 #   test -n "$(tmux ls 2>/dev/null)" && exec tmux attach || exec tmux
 # }
 
+# use gpg-agent for gpg 
+# from gpg-agent(1)
+ if [ -f "~/.gnupg/.gpg-agent-info" ]; then
+ 	. "~/.gnupg/.gpg-agent-info"
+ 	export GPG_AGENT_INFO
+ 	# export SSH_AUTH_SOCK
+ fi
+GPG_TTY=$(tty)
+export GPG_TTY
 
+# fuzzyFinder FIXME bloque la completion
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+echo "<< .bashrc"
 # end .bashrc
