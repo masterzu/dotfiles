@@ -24,6 +24,14 @@ alias sa='source ~/.bash_aliases'
 alias va='vim ~/.bash_aliases'
 alias vb='vim ~/.bashrc'
 
+# dirs
+alias cb='cd ~/bin'
+alias cdoc='cd ~/docs/docs-braque'
+alias cdot='cd ~/dotfiles'
+alias csrc='cd ~/src'
+alias csuck='cd ~/src/suckless/'
+alias cdev='cd ~/devel'
+
 # irssi
 alias vic='vim ~/.irssi/config'
 
@@ -45,10 +53,9 @@ alias cnb='cd  ~/.newsboat'
 alias vnbu='vim ~/.newsboat/urls'
 alias vnbc='vim ~/.newsboat/config'
 
-# dirs
-alias cb='cd ~/bin'
-alias cdoc='cd ~/docs/docs-braque'
-alias cdot='cd ~/dotfiles'
-alias csrc='cd ~/src'
-alias cdev='cd ~/devel'
+#gcalcli
+alias gcm='gcalcli --calendar Weather agenda'
+alias gca='gcalcli agenda --military'
+alias gcall='gcalcli --calendar travail --calendar ecoles --calendar agenda --calendar CGT calw --military'
+
 # end .bash_aliases
