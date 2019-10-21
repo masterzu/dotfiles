@@ -67,6 +67,10 @@ function short_path {
 		sed -e "s;$home;~;" 
 }
 
+function nix_func() {
+	test -n "$IN_NIX_SHELL" && echo "$IN_NIX_SHELL"
+}
+
 function prompt_func() {
     previous_return_value=$?;
 
@@ -88,6 +92,9 @@ function prompt_func() {
 
     # git status
     test -n "$(_my_parse_git_branch)" && prompt="${prompt}[git:${GREEN}$(_my_parse_git_branch)${COLOR_NONE}]"
+
+    # nix-shell
+    test -n "$(nix_func)" && prompt="${prompt}[nix:${GREEN}$(nix_func)${COLOR_NONE}]"
 
     # add -- \w (git branch) if new minute or cd
     # [[ "x$previous_path" != "x$(pwd)" ]] ||  [[  "$previous_minute" != "$(date +%M)" ]] && prompt="$prompt $(_my_parse_git_branch) -- $(date +%a\ %d\ %B)"
