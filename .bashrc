@@ -9,8 +9,6 @@ echo ">> .bashrc"
 export MAIL=/var/mail/$USER
 export MAILCHECK=30
 
-export EDITOR=vim
-
 export LANG=fr_FR.UTF-8
 
 # history : don't put duplicate lines in the history. Ignore line begin with space
@@ -56,7 +54,9 @@ DEFAULT_COLOR="\[\033[00m\]"
 PROMPT_COMMAND='PS1="[\u@\h] -- \w  "; echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
 
 # I love google-chrome :)
-export BROWSER=google-chrome
+# export BROWSER=google-chrome
+# but w3m is lighter
+export BROWSER=w3m
 # ... and vim
 export EDITOR=vim
 
@@ -81,7 +81,7 @@ test -f ~/dotfiles/.dircolors && eval "`dircolors ~/dotfiles/.dircolors`"
 export MANPATH=$HOME/.local/share/man:
 
 # added by Nix installer
-if [ -e /home/patrick/.nix-profile/etc/profile.d/nix.sh ]; then . /home/patrick/.nix-profile/etc/profile.d/nix.sh; fi 
+# od it in .bash_profile if [ -e /home/patrick/.nix-profile/etc/profile.d/nix.sh ]; then . /home/patrick/.nix-profile/etc/profile.d/nix.sh; fi 
 
 # autolaunch tmux
 # https://wiki.archlinux.org/index.php/Tmux#Bash
@@ -102,6 +102,14 @@ export GPG_TTY
 
 # fuzzyFinder FIXME bloque la completion
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+### tuir / fork of rtv : reddit terminal Viewer
+export TUIR_BROWSER=urlportal.sh
+export TUIR_URLVIEWER=urlview
+
+# PATH
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
 
 echo "<< .bashrc"
 # end .bashrc
