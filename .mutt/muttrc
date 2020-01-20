@@ -1,0 +1,205 @@
+# mutt config
+#
+# from https://github.com/Nelyah/dotfiles/blob/master/.mutt/settings
+
+# 
+# define realname, from, hostname and alternates
+source ~/.mutt/muttrc-me
+
+set use_envelope_from=yes
+
+set reverse_name
+set reverse_realname
+
+
+#
+# paths
+#
+# set folder           = ~/.mail               # mailbox location -- set in accounts files
+set alias_file       = ~/.mutt/alias         # where to store aliases
+set header_cache     = ~/.mutt/cache/headers # where to store headers
+set message_cachedir = ~/.mutt/cache/bodies  # where to store bodies
+set certificate_file = ~/.mutt/certificates  # where to store certs
+set tmpdir           = ~/.mutt/temp          # where to keep temp files
+set print_command    = lp
+set ispell           = "aspell check"
+
+#
+# general
+#
+
+set mail_check=90 		# check mail every (s)
+set timeout=15 			# wait only (s) max
+set editor='vim "+set spelllang=fr"'
+set nowait_key
+
+# text/html ....
+alternative_order text/plain text/html
+auto_view text/html
+
+
+# status format
+# default is = "-%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---"
+set status_format = "-%r-%v@%h: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---"
+#
+# pager format
+# default is "-%Z- %C/%m: %-20.20n   %s%*  -- (%P)"
+set pager_format = "-%Z- %C/%m: from <%n> « %s »%* -- (%P)"
+
+#
+# index
+#
+# index format dynamic change
+# from https://muttmua.gitlab.io/mutt/manual-dev.html#index-format-hook
+set index_format="%4C %Z %?H?[%H]? %-10@date@ %-30.30L (%?l?%4l&%4c?) %s"
+index-format-hook  date  "~d<1d"    "%[%H:%M]"
+index-format-hook  date  "~d<2d"    "hier %[%H:%M]"
+index-format-hook  date  "~d<5d"    "%[%a %H:%M]"
+index-format-hook  date  "~d<1m"    "%[%a %d]"
+index-format-hook  date  "~d<1y"    "%[%d %b]"
+index-format-hook  date  "~A"       "%[%m/%Y]"
+
+set sort = threads			# default sorting
+set sort_aux = last-date-received	# second sorting
+
+
+#
+# aliases
+#
+source ~/.mutt/alias
+
+#
+# keybinding
+#
+bind index '"'	what-key	# print key code -- ctrl+g to quit
+bind index G imap-fetch-mail 	# force fetch new email
+bind index K previous-unread
+bind index J next-unread
+bind pager <pageup> half-up
+bind pager <pagedown> half-down
+
+
+#
+# Macros
+#
+
+# save messages
+macro index >S <tag-prefix><save-message>=SPAM<enter> 'save to SPAM'
+macro index >V <tag-prefix><save-message>=VLAN<enter> 'save to VLAN'
+macro index >D <tag-prefix><save-message>=diffusion<enter> 'save to diffusion'
+macro index >C <tag-prefix><save-message>=CSSI<enter> 'save to CSSI'
+macro index >I <tag-prefix><save-message>=IMPRIMANTES<enter> 'save to IMPRIMANTES'
+macro index >L <tag-prefix><save-message>=logwatchs<enter> 'save to logwatchs'
+
+# urlview
+# macro index,pager \cb "|urlview\n" "urlview to extract URLs"
+macro index,pager \cb "<pipe-message>urlscan<enter>" "open URL in BROWSER"
+
+# limit to new/old/flag messages
+macro index ,n  "<limit>(~N|~O|~F)<Enter>"  "view new/flag"
+macro index ,a  "<limit>~A<Enter>"       "view all"
+
+# get new messages by default
+folder-hook . push ,n
+
+# urlscan
+# macro index,pager \cb "<pipe-message>urlscan<Enter>" "urlscan to extract URLs"
+# macro attach,compose \cb "<pipe-entry>urlscan<Enter>" "urlscan to extract URLs"
+# macro index,pager \cc "<pipe-message>urlscanchrome<Enter>" "urlscan to extract URLs (chrome)"
+# macro attach,compose \cc "<pipe-entry>urlscanchrome<Enter>" "call urlscan to extract URLs out of a message"
+
+# identities
+macro compose \cf "<edit-from>^Umoi\_<tab>" "Select from"
+
+#
+# notmoch-mutt from debian
+# from /etc/Muttrc.d/notmuch-mutt.rc
+#
+macro index <F8> \
+"<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+<shell-escape>notmuch-mutt -r --prompt search<enter>\
+<change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+<enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+      "notmuch: search mail"
+
+macro index <F9> \
+"<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+<pipe-message>notmuch-mutt -r thread<enter>\
+<change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+<enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+      "notmuch: reconstruct thread"
+
+macro index <F6> \
+"<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+<pipe-message>notmuch-mutt tag -- -inbox<enter>\
+<enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+      "notmuch: remove message from inbox"
+
+#
+# spam detection - champs %H
+#
+spam "X-j-chkmail-Status: Spam (.*)"		"ju/%1"
+spam "X-Spam-Status: Yes"			"sa"
+spam "X-Amavis-Spam-Status: Yes"		"am"
+spam "X-Renater-SpamScore: ([1-9][0-9]*)"	"re/%1"
+set spam_separator="|"
+
+#
+# Messages
+#
+set rfc2047_parameters			# decoded some 
+set send_charset = "us-ascii:utf-8"	# UTF stuff
+set assumed_charset = "utf-8"
+set charset = "utf-8"
+set date_format = "%d %b %Y a %H:%M:%S %Z"
+set attribution_locale = "fr_FR.UTF-7"
+set attribution="Le %d, %n a écrit :"
+
+#
+# headers
+#
+ignore *
+unignore from date subject to cc User-Agent Content-Length
+unignore organization organisation x-mailer: x-newsreader: x-mailing-list:
+unignore posted-to: List-Id: 
+unignore X-j-chkmail-Status: X-Spam-Status: X-Amavis-Spam-Status: X-Renater-SpamScore:
+# reset header order
+unhdr_order *
+hdr_order Date: Subject: From: From To: Cc: User-Agent: x-mailer: posted-to: List-Id: x-mailing-list: Content-Length: X-*:
+
+# pager
+set pager_stop			# dont exit at the end of the message with <space>
+
+#
+# Listes
+#
+
+subscribe .*@listes.upmc.fr
+subscribe .*@lists.debian.org
+subscribe .*@pmichaud.com
+subscribe .*@services.cnrs.fr
+subscribe .*@listes.fercsup-cgt.org
+
+#
+# Colors
+#
+source $HOME/.mutt/muttrc-colors
+
+#
+# from https://github.com/Nelyah/dotfiles/blob/master/.mutt/settings
+# use <tab> to change 
+macro generic \Cx| "<enter-command>source"
+macro generic \Cx& "<enter-command>macro index \\t \"\\Cx"
+macro index <tab> "\Cx1"
+# macro generic \Cx0 "\Cx| ~/.mutt/accounts/archive\"\n\Cx&1\"<enter><change-folder>!<enter>"
+
+# define accounts and Fx links
+# +smtp_url, sll_force_tls, ssl_starttls
+source $HOME/.mutt/muttrc-accounts
+
+#
+# Query : ldap
+#
+# Use with Ctrl+t
+set query_command = "$HOME/.mutt/mutt_ldap.sh %s"
+
