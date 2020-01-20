@@ -1,56 +1,14 @@
 # vim: filetype=muttrc
 # from https://github.com/LukeSmithxyz/mutt-wizard/blob/master/etc/muttcol
-
-# Default index colors:
-color index default default '.*'			# default
-color index magenta default 'ray|lesaec|mackagny|popinet|info'
-color index default default  '~u'			# list messages
-color index green default '~P'				# from me
-color index brightgreen color0 '~p'				# for me
-color index brightyellow color0 "~N"
-color index yellow color0 "~O"
-color index red color0 '~T'				# tagged messages
-color index cyan blue '~D'			# deleted messages
-
-# neomutt ??
-# color index_author red default '.*'
-# color index_author brightred black "~N"
-# color index_subject cyan default '.*'
-# color index_subject brightcyan black "~N"
-# color index_number blue default
-
+#
 # Header colors:
-color header brightblue color0 ".*"
-color header green color0 "^(From)"
-color header brightwhite color0 "^(Subject)"
-color header brightmagenta color0 "^(CC|BCC)"
-color header brightred white "^(X-j-chkmail-Status)"
-
-mono bold bold
-mono underline underline
-mono indicator reverse
-mono error bold
-color normal default default
-color indicator brightblack white
-color normal brightyellow default
-color error red default
-color tilde black default
-color message cyan default
-color markers red white
-color attachment white default
-color search brightmagenta default
-color status brightyellow blue
-color hdrdefault brightgreen default
-color quoted green default
-color quoted1 blue default
-color quoted2 cyan default
-color quoted3 yellow default
-color quoted4 red default
-color quoted5 brightred default
-color signature brightgreen default
-color bold black default
-color underline black default
-color normal default default
+# color ( header | body ) <foreground> <background> <regexp>
+color header brightwhite color236 "^Subject"
+color header color124 color236 "^From"
+color header color11 color236 "^From:"
+color header color10 color236 "^To"
+color header color40 color236 "^(CC|BCC)"
+color header color9 color240 "^(X-j-chkmail-Status|X-Spam-Status|X-Amavis-Spam-Status|X-Renater-SpamScore)"
 
 color body brightred default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # Email addresses
 color body brightblue default "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URL
@@ -68,6 +26,49 @@ color body cyan default "(Good signature)"
 color body brightblack default "^gpg: Good signature .*"
 color body brightyellow default "^gpg: "
 color body brightyellow red "^gpg: BAD signature from.*"
+color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+
+# color index <foreground> <background> <pattern>
+# color index default default '.*'			# default
+color index default default  '~u'			# list messages
+color index green default '~P'				# from me
+color index brightgreen color0 '~p'			# for me
+color index brightyellow color0 "~N"			# new messages
+color index yellow color0 "~O"				# ols messages
+color index red color0 '~T'				# tagged messages
+color index red default '~H ..*'			# spam messages
+color index cyan blue '~D'				# deleted messages
+color index magenta default 'ray|lesaec|mackagny|popinet|info'
+color index color202 default '~f netdata ~s "needs attention"'
+
+# color <ojb> <foreground> <background>
+color normal default default
+color indicator brightblack white
+color normal brightyellow default
+color error red default
+color tilde black default
+color message cyan default
+color markers red white
+color attachment white default
+color search brightmagenta default
+color status brightyellow blue
+color hdrdefault color248 color236
+color quoted green default
+color quoted1 blue default
+color quoted2 cyan default
+color quoted3 yellow default
+color quoted4 red default
+color quoted5 brightred default
+color signature brightgreen default
+color bold black default
+color underline black default
+color normal default default
+
+# mono
+
+mono bold bold
+mono underline underline
+mono indicator reverse
+mono error bold
 mono body bold "^gpg: Good signature"
 mono body bold "^gpg: BAD signature from.*"
-color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
