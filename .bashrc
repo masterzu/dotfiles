@@ -107,8 +107,15 @@ export GPG_TTY
 export TUIR_BROWSER=urlportal.sh
 export TUIR_URLVIEWER=urlview
 
-# PATH
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+### PATH ##################################################
+### rust
+test -d $HOME/.cargo/bin && PATH="$HOME/.cargo/bin:$PATH"
+
+### golang - default is $HOME/go/bin
+test -d $HOME/go/bin && PATH="$HOME/go/bin:$PATH"
+
+export PATH=.:$HOME/bin:$PATH
+# export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 
 echo "<< .bashrc"
